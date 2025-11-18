@@ -1,0 +1,78 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+# Gradle
+.gradle/
+build/
+app/build/
+**/build/
+
+# Local configuration
+local.properties
+*.iml
+
+# Android Studio / IntelliJ
+.idea/
+*.ipr
+*.iws
+
+# Misc
+.DS_Store
+*.log
+
+# Generated files
+captures/
+output.json
+
+# Keystore files (IMPORTANT)
+*.jks
+*.keystore
+
+# NDK
+obj/
+*.so
+
+# APK / AAB / outputs
+*.apk
+*.ap_
+*.aab
+
+# Gradle caches
+.gradle/
+**/out/
+
+# Kotlin specific (if needed)
+*.kts
+
+# Jetpack Compose previews
+previews/
+
+# Signing / sensitive
+signing-config.json
+
+# Crashlytics/Firebase
+crashlytics-build.properties
+fabric.properties
+
+# When using local gradle.properties (machine-specific)
+gradle.properties
+
+# If using external native build
+.cxx/
+
+# VS Code (optional)
+.vscode/
+
