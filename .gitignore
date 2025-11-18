@@ -68,7 +68,6 @@ crashlytics-build.properties
 fabric.properties
 
 # When using local gradle.properties (machine-specific)
-gradle.properties
 
 # If using external native build
 .cxx/
