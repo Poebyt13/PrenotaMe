@@ -1,6 +1,6 @@
 
 
-# Backend — PrenotaMe (documentazione rapida)
+# Backend — PrenotaMe 
 
 Panoramica
 - Questo repository contiene il backend Express per l'app PrenotaMe. Gestisce autenticazione, eventi e prenotazioni. Il codice è in fase di sviluppo: le funzionalità principali sono strutturate ma potrebbero non essere complete.
