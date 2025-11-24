@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <resources>
     <style name="stile_container">
         <item name="android:layout_marginTop">35dp</item>

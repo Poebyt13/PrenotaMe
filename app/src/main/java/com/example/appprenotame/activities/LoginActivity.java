@@ -3,6 +3,7 @@ package com.example.appprenotame.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -37,5 +38,26 @@ public class LoginActivity extends AppCompatActivity {
             Intent intent = new Intent(LoginActivity.this , HomeActivity.class);
             startActivity(intent);
         });
+
+
+        Button bottone = findViewById(R.id.buttonLogin);
+        bottone.setOnClickListener(v -> {
+            validateForm();
+        });
+
+    }
+
+    private void validateForm() {
+        EditText email = findViewById(R.id.editTextEmail);
+        EditText password = findViewById(R.id.editTextPassword);
+        String emailText = email.getText().toString();
+        String passwordText = password.getText().toString();
+
+        if (emailText.isEmpty()) {
+            email.setError("Email required!");
+        }
+        if (passwordText.isEmpty()) {
+            password.setError("Password required!");
+        }
     }
 }
