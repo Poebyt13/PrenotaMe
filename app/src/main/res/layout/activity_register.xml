@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.LoginActivity"
+    tools:context=".activities.RegisterActivity"
     android:orientation="vertical"
     android:background="@color/white"
     android:gravity="center">
@@ -55,6 +55,14 @@
             android:inputType="textPassword"
             android:layout_marginTop="16dp" />
 
+        <EditText
+            android:id="@+id/editTextRepeatPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Repeat Password"
+            android:inputType="textPassword"
+            android:layout_marginTop="16dp" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,15 +74,15 @@
                 android:id="@+id/textSpan_Account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="If you don't have an account?"
+                android:text="If you have an account?"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/textSpan_SignUp"
+                android:id="@+id/textSpan_LogIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Sign Up"
+                android:text=" Log In"
                 android:textColor="#1976D2"
                 android:textSize="14sp"
                 android:clickable="true"
@@ -93,12 +101,12 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/buttonLogin"
+            android:id="@+id/buttonSignUp"
             android:layout_width="250dp"
             android:layout_height="50dp"
-            android:text="Log In"
+            android:text="Sign Up"
             android:textSize="17dp"
-            android:onClick="onLoginClicked"/>
+            android:onClick="onSignUpClicked"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
