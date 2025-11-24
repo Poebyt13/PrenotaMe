@@ -1,46 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    tools:context=".activities.MainActivity"
+    android:orientation="vertical"
+    style="@style/stile_container">
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="96dp"
-        tools:src="@tools:sample/avatars" />
+        android:id="@+id/image"
+        android:layout_width="219dp"
+        android:layout_height="137dp"
+        app:srcCompat="@drawable/logo"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="69dp"
+        style="@style/stile_immagine"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/titolo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="PrenotaMe"
-        android:textSize="50dp"
-        tools:layout_editor_absoluteX="84dp"
-        tools:layout_editor_absoluteY="232dp" />
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="245dp"
+        style="@style/stile_titolo"/>
 
     <TextView
+        android:id="@+id/sotto_titolo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome to prenotaMe"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.432" />
+        tools:layout_editor_absoluteX="159dp"
+        tools:layout_editor_absoluteY="303dp"
+        style="@style/stile_sotto_titolo" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/button_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Start"
-        tools:layout_editor_absoluteX="190dp"
-        tools:layout_editor_absoluteY="654dp" />
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="644dp"
+        style="@style/button_text_style"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
