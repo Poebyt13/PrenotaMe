@@ -3,6 +3,7 @@
 <resources>
     <style name="stile_container">
         <item name="android:layout_marginTop">35dp</item>
+        <item name="android:background">@drawable/home_background</item>
     </style>
 
     <style name="stile_immagine">
@@ -27,8 +28,8 @@
     </style>
 
     <style name="button_text_style">
-        <item name="android:textColor">#4921CE</item>
+        <item name="android:textColor">#FFFFFF</item>
         <item name="android:layout_gravity">center</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">28sp</item>
     </style>
 </resources>
