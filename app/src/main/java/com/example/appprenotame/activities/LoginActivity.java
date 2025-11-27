@@ -33,13 +33,6 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        Button buttonLogin = findViewById(R.id.buttonLogin);
-        buttonLogin.setOnClickListener(v -> {
-            Intent intent = new Intent(LoginActivity.this , HomeActivity.class);
-            startActivity(intent);
-        });
-
-
         Button bottone = findViewById(R.id.buttonLogin);
         bottone.setOnClickListener(v -> {
             validateForm();
@@ -54,9 +47,13 @@ public class LoginActivity extends AppCompatActivity {
 
         if (emailText.isEmpty()) {
             email.setError("Email required!");
+            return;
         }
         if (passwordText.isEmpty()) {
             password.setError("Password required!");
+            return;
         }
+        Intent intent = new Intent(LoginActivity.this , HomeActivity.class);
+        startActivity(intent);
     }
 }

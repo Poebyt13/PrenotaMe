@@ -2,7 +2,7 @@
 <resources>
     <style name="stile_container">
         <item name="android:layout_marginTop">35dp</item>
-        <item name="android:background">@drawable/home_background</item>
+        <item name="android:background">@drawable/background_home</item>
     </style>
 
     <style name="stile_immagine">
