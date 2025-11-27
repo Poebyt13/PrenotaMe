@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.CompleteProfileFragment"
+    android:background="@color/white">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/logo_pagina"
+            style="@style/logo_welcome"
+            android:layout_width="193dp"
+            android:layout_height="172dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            style="@style/title_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello,\nwelcome!" />
+
+        <TextView
+            style="@style/sottotitolo_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="complete your profile!" />
+
+        <EditText
+            android:id="@+id/username_field"
+            style="@style/usernameField_welcome"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="Username"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/editTextDescrizione"
+            style="@style/description_welcome"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:gravity="top|start"
+            android:hint="Description"
+            android:inputType="textMultiLine"
+            android:padding="16dp"
+            android:scrollbars="vertical" />
+
+        <Button
+            android:id="@+id/continue_botton"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:text="continue"
+            style="@style/button_welcome" />
+
+    </LinearLayout>
+
+
+</FrameLayout>

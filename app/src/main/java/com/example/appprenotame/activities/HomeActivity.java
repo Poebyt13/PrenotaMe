@@ -9,6 +9,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.appprenotame.R;
+import com.example.appprenotame.fragments.CompleteProfileFragment;
 import com.example.appprenotame.fragments.WelcomeFragment;
 
 public class HomeActivity extends AppCompatActivity {
@@ -26,7 +27,7 @@ public class HomeActivity extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container_view, new WelcomeFragment())
+                    .replace(R.id.fragment_container_view, new CompleteProfileFragment())
                     .commit();
         }
 

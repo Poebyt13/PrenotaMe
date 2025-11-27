@@ -38,8 +38,6 @@ public class RegisterActivity extends AppCompatActivity {
             validateForm();
         });
     }
-
-
     private void validateForm() {
         EditText emailField = findViewById(R.id.editTextEmail);
         EditText passwordField = findViewById(R.id.editTextPassword);
@@ -54,6 +52,5 @@ public class RegisterActivity extends AppCompatActivity {
         if (!repeatPasswordField.getText().toString().equals(passwordField.getText().toString())) {
             repeatPasswordField.setError("Password non combaciano");
         }
-
     }
 }
