@@ -1,63 +1,218 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.MainFragment">
+    android:padding="16dp"
+    tools:context=".fragments.MainFragment"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
 
         <TextView
+            android:id="@+id/textViewTitleHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Available Events"
-            android:textSize="24sp" />
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="24dp"
+            android:visibility="gone"/>
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/linearLayoutTitleHome"
+            android:layout_width="325dp"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="8dp">
+            android:visibility="gone">
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Available Events"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="24dp"/>
+            <!-- Filter Button -->
+            <ImageButton
+                android:id="@+id/buttonFilter"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/background_shape"
+                android:contentDescription="Filter Icon"
+                android:scaleType="centerInside"
+                android:padding="8dp"
+                android:src="@drawable/icon_plus"/>
+        </LinearLayout>
 
+        <!-- Search Bar e Filter Button container -->
+        <LinearLayout
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginBottom="20dp">
+
+            <!-- Search Bar -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp"
+                android:background="@drawable/background_shape">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/icon_search"
+                    android:contentDescription="Search Icon"/>
+
+                <EditText
+                    android:id="@+id/input_search"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="Search Events"
+                    android:background="@null"
+                    android:paddingStart="8dp"
+                    android:textSize="16sp"
+                    android:inputType="text"/>
+            </LinearLayout>
+
+            <!-- Filter Button -->
+            <ImageButton
+                android:id="@+id/buttonFilter"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/background_shape"
+                android:contentDescription="Filter Icon"
+                android:scaleType="centerInside"
+                android:padding="8dp"
+                android:src="@drawable/icon_filter"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="325dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/background_shape">
+
+            <!-- Parte su: immagine evento piena, tocca bordi del genitore -->
+            <ImageView
+                android:layout_margin="2dp"
+                android:id="@+id/buttonAddEvent"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/background_shape_top"
+                android:src="@drawable/background_party"
+                android:scaleType="centerCrop"
+                android:clipToOutline="true"/>
+
+
+
+            <!-- Parte giù: info evento -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:padding="8dp"
-                android:layout_margin="8dp">
+                android:orientation="vertical"
+                android:padding="16dp">
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/icon_search"
-                android:contentDescription="Search Icon"
-                android:tint="@color/black"/>
+                <!-- Data e ora -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp">
 
-            <EditText
-                android:id="@+id/input_search"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="Search Events"
-                android:background="@null"
-                android:paddingStart="8dp"
-                android:textSize="16sp"
-                android:inputType="text"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Nov. 17, 2024"
+                        android:textStyle="bold"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:00 - 12:00"/>
+                </LinearLayout>
+
+                <!-- Titolo evento -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Birthday Party"
+                    android:layout_marginTop="4dp"/>
+
+                <!-- Descrizione città -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/icon_location"
+                        android:contentDescription="Location Icon"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="New York City"
+                        android:textColor="#6c4fff"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
+
+                <!-- Utente + Join -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center_vertical">
+
+                    <!-- Immagine utente a sinistra -->
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/icon_user_example"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/background_circle"
+                        android:clipToOutline="true"/>
+
+                    <!-- Spacer invisibile per spingere il bottone a destra -->
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <!-- Bottone Join a destra -->
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Join Event"/>
+                </LinearLayout>
+
+            </LinearLayout>
         </LinearLayout>
 
-
-        <Button
-                android:id="@+id/btn_view_events"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="View Events"/>
-        </LinearLayout>
 
     </LinearLayout>
 
