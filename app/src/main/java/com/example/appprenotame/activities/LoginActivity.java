@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
         });
 
     }
-
     private void validateForm() {
         EditText email = findViewById(R.id.editTextEmail);
         EditText password = findViewById(R.id.editTextPassword);

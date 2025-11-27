@@ -2,6 +2,8 @@ package com.example.appprenotame.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -30,5 +32,28 @@ public class RegisterActivity extends AppCompatActivity {
             Intent intent = new Intent(RegisterActivity.this , LoginActivity.class);
             startActivity(intent);
         });
+
+        Button bottone = findViewById(R.id.buttonSignUp);
+        bottone.setOnClickListener(v -> {
+            validateForm();
+        });
+    }
+
+
+    private void validateForm() {
+        EditText emailField = findViewById(R.id.editTextEmail);
+        EditText passwordField = findViewById(R.id.editTextPassword);
+        EditText repeatPasswordField = findViewById(R.id.editTextRepeatPassword);
+
+        if (emailField.getText().toString().isEmpty()) {
+            emailField.setError("Email required");
+        }
+        if (passwordField.getText().toString().isEmpty()) {
+            passwordField.setError("Password required");
+        }
+        if (!repeatPasswordField.getText().toString().equals(passwordField.getText().toString())) {
+            repeatPasswordField.setError("Password non combaciano");
+        }
+
     }
 }
