@@ -106,6 +106,7 @@
                 android:src="@drawable/icon_filter"/>
         </LinearLayout>
 
+        <!-- Evento Card -->
         <LinearLayout
             android:layout_width="325dp"
             android:layout_height="wrap_content"
@@ -191,6 +192,7 @@
 
                     <!-- Immagine utente a sinistra -->
                     <ImageView
+                        android:id="@+id/userProfileImage"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/icon_user_example"

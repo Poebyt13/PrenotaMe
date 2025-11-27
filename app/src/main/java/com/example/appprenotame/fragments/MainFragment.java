@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -35,6 +36,16 @@ public class MainFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
         });
+        ImageView profileButton = view.findViewById(R.id.userProfileImage);
+        profileButton.setOnClickListener(v -> {
+            getParentFragmentManager().beginTransaction()
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .replace(R.id.fragment_container_view, new UserProfileFragment())
+                    .addToBackStack(null)
+                    .commit();
+        });
+
+        boolean isAdmin = false; // Dovremmo determinare questo valore in base allo stato di accesso dell'utente
 
         TextView titolo = view.findViewById(R.id.textViewTitleHome);
         LinearLayout titoloWithAdminOptions = view.findViewById(R.id.linearLayoutTitleHome);
@@ -44,6 +55,8 @@ public class MainFragment extends Fragment {
         } else {
             titolo.setVisibility(View.VISIBLE);
         }
+
+
 
     }
 
