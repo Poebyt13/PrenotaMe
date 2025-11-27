@@ -10,7 +10,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.appprenotame.R;
 import com.example.appprenotame.fragments.CompleteProfileFragment;
-import com.example.appprenotame.fragments.WelcomeFragment;
+
 
 public class HomeActivity extends AppCompatActivity {
 
