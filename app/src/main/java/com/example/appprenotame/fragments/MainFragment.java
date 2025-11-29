@@ -45,7 +45,6 @@ public class MainFragment extends Fragment {
                     .commit();
         });
 
-        boolean isAdmin = false; // Dovremmo determinare questo valore in base allo stato di accesso dell'utente
 
         TextView titolo = view.findViewById(R.id.textViewTitleHome);
         LinearLayout titoloWithAdminOptions = view.findViewById(R.id.linearLayoutTitleHome);

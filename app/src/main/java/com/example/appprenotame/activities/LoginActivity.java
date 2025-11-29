@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.appprenotame.R;
+import com.example.appprenotame.network.RetrofitClient;
+import com.example.appprenotame.network.models.api.AuthService;
+import com.example.appprenotame.network.models.request.LoginRequest;
+import com.example.appprenotame.network.models.response.ApiResponse;
+import com.example.appprenotame.network.models.response.LoginData;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -53,7 +63,35 @@ public class LoginActivity extends AppCompatActivity {
             password.setError("Password required!");
             return;
         }
-        Intent intent = new Intent(LoginActivity.this , HomeActivity.class);
-        startActivity(intent);
+
+        AuthService authService = RetrofitClient.getClient().create(AuthService.class);
+        LoginRequest request = new LoginRequest(emailText, passwordText);
+
+        authService.login(request).enqueue(new Callback<ApiResponse<LoginData>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<LoginData>> call, Response<ApiResponse<LoginData>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+
+                    ApiResponse<LoginData> body = response.body();
+
+                    if (response.body().isSuccess()) {
+                        LoginData loginData = body.getData();
+                        Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        Toast.makeText(LoginActivity.this, "Login successful! Welcome " + loginData.getUsername(), Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(LoginActivity.this, body.getMessagge(), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(LoginActivity.this, "Errore server: " + response.code(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<LoginData>> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(LoginActivity.this, "Errore di rete: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
