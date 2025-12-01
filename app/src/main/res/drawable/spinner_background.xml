@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Sfondo principale -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#000000"/> <!-- Cambia colore se vuoi -->
+            <corners android:radius="12dp"/>
+            <stroke android:width="1dp" android:color="#CCCCCC"/>
+        </shape>
+    </item>
+
+    <!-- Freccia con padding -->
+    <item android:gravity="end|center_vertical">
+        <inset
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="12dp"
+            android:insetBottom="0dp">
+            <bitmap
+                android:src="@drawable/spinner_arrow"
+                android:gravity="center"/>
+        </inset>
+    </item>
+
+</layer-list>

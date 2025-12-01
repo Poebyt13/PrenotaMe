@@ -5,193 +5,222 @@
     android:layout_height="match_parent"
     tools:context=".fragments.AdminCreateEvent">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:fillViewport="true">
 
-        <!-- Header -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:src="@drawable/icon_arrow_left"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/arrow_indietro" />
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Create event"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-
-            <View
-                android:layout_width="50dp"
-                android:layout_height="50dp" />
-        </LinearLayout>
-
-        <!-- Form Container -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingLeft="20dp">
 
-            <!-- Title -->
-            <TextView
-                android:text="Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/create_event_titleField"
-                android:hint="Event example name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp" />
-
-            <!-- Description -->
-            <TextView
-                android:text="Description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
-            <EditText
-                android:id="@+id/create_event_descriptionField"
-                android:hint="Description example ..."
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp" />
-
-            <!-- Dates -->
+            <!-- Header -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
+                android:orientation="horizontal">
 
-                <LinearLayout
+                <ImageView
+                    android:id="@+id/arrow_indietro"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/icon_arrow_left" />
+
+                <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Create event"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:text="Date start"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/dataInizio"
-                        android:hint="17/02/2025 10:00"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="datetime"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:text="Date end"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <EditText
-                        android:id="@+id/dataFine"
-                        android:hint="17/02/2025 10:00"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="datetime"/>
-                </LinearLayout>
+                <View
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
             </LinearLayout>
 
-            <!-- Category and Seats -->
+            <!-- Form Container -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="20dp">
+                android:orientation="vertical"
+                android:padding="20dp">
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <!-- Title -->
+                <TextView
+                    style="@style/createEventTitle"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:text="Title" />
 
-                    <TextView
-                        android:text="Category"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                <EditText
+                    android:id="@+id/create_event_titleField"
+                    style="@style/createEventTitleField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:hint="Event example name" />
 
-                    <Spinner
-                        android:id="@+id/spinner"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                <!-- Description -->
+                <TextView
+                    style="@style/createEventDescriptionTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Description" />
+
+                <EditText
+                    android:id="@+id/create_event_descriptionField"
+                    style="@style/createEventDescriptionField"
+                    android:layout_width="match_parent"
+                    android:layout_height="170dp"
+                    android:layout_marginBottom="20dp"
+                    android:gravity="top|start"
+                    android:hint="Description example ..."
+                    android:inputType="textMultiLine"
+                    android:padding="16dp"
+                    android:scrollbars="vertical" />
+
+                <!-- Dates -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/dataStartTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Date start" />
+
+                        <EditText
+                            android:id="@+id/dataInizio"
+                            style="@style/createEventdateStartField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="17/02/2025 10:00"
+                            android:inputType="datetime" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/dataEndTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Date end" />
+
+                        <EditText
+                            android:id="@+id/dataFine"
+                            style="@style/createEventdateEndField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="17/02/2025 10:00"
+                            android:inputType="datetime" />
+                    </LinearLayout>
                 </LinearLayout>
 
+                <!-- Category and Seats -->
                 <LinearLayout
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_marginBottom="20dp"
+                    android:orientation="horizontal">
 
-                    <TextView
-                        android:text="Seats"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="20dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/seatsNumber"
-                        android:inputType="number"
-                        android:hint="10"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <TextView
+                            style="@style/categoryTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Category" />
+
+                        <Spinner
+                            android:id="@+id/spinner"
+                            style="@style/categoryField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/seatsTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Seats" />
+
+                        <EditText
+                            android:id="@+id/seatsNumber"
+                            style="@style/seatsField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="10"
+                            android:inputType="number" />
+                    </LinearLayout>
                 </LinearLayout>
+
+                <TextView
+                    style="@style/locationTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Location" />
+
+                <EditText
+                    android:id="@+id/posizione"
+                    style="@style/locationField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:hint="Milano" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Img URL"
+                    style="@style/urlTitle" />
+
+                <EditText
+                    android:id="@+id/urlImmagine"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:hint="https://...com"
+                    style="@style/urlField" />
+
+                <Button
+                    android:id="@+id/submitButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:text="Submit" />
+
             </LinearLayout>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Location" />
-
-            <EditText
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:hint="Milano"
-                android:id="@+id/posizione"
-                android:layout_marginBottom="20dp" />
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Img URL" />
-
-            <EditText
-                android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                android:hint="https://...com"
-                android:id="@+id/urlImmagine"
-                android:layout_marginBottom="20dp" />
-
-            <Button
-                android:id="@+id/submitButton"
-                android:text="Submit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp" />
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </FrameLayout>
