@@ -9,5 +9,6 @@ const router = express.Router();
 // login e registrazione routes
 router.post('/register', authController.register);
 router.post('/login', authController.login);
+router.post('/complete-profile', authController.completeProfile);
 
 export default router;

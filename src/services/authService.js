@@ -49,3 +49,14 @@ export const loginUser = async (email, password) => {
     created_at: user.created_at,
   };
 };
+
+// Funzioni per completare il profilo utente
+export const completeUserProfile = async (id, username, description) => {
+  const pool = getPool();
+  await pool.execute(
+    "UPDATE users SET username = ?, description = ? WHERE id = ?",
+    [username, description, id]
+  );
+
+  return { message: "Profilo utente aggiornato con successo" };
+}

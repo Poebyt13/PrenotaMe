@@ -22,3 +22,14 @@ export const login = async (req, res, next) => {
         next(error);
     }
 }
+
+// Controller per completare il profilo utente
+export const completeProfile = async (req, res, next) => {
+    try {
+        const { username, description, id } = req.body;
+        const result = await authService.completeUserProfile(id, username, description);
+        res.status(200).json({ success: true, data: result });
+    } catch (error) {
+        next(error);
+    }
+}

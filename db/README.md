@@ -17,7 +17,8 @@ DB_HOST=localhost
 DB_USER=il_tuo_user_locale
 DB_PASSWORD=la_tua_password
 DB_NAME=AndroidProject
-CORS_ORIGIN=http://localhost:5173
+DB_PORT=3306
+PORT=3000
 ```
 
 Avvio dell'app (dopo aver importato lo schema):
