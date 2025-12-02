@@ -1,6 +1,9 @@
 CREATE DATABASE IF NOT EXISTS `AndroidProject`;
 USE AndroidProject;
 
+
+-- Creazione delle tabelle
+
 CREATE TABLE `categories` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `name` VARCHAR(50) NOT NULL
@@ -42,3 +45,28 @@ CREATE TABLE `bookings` (
   FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
   FOREIGN KEY (`event_id`) REFERENCES `events`(`id`) ON DELETE CASCADE
 );
+
+-- Inserimento dati iniziali nelle categorie
+
+INSERT INTO `categories` (`name`) VALUES
+('Musica'),
+('Sport'),
+('Arte e Cultura'),
+('Tecnologia'),
+('Cibo e Bevande'),
+('Salute e Benessere'),
+('Viaggi e Turismo'),
+('Formazione e Corsi'),
+('Cinema e Spettacolo'),
+('Eventi per Famiglie')
+
+INSERT INTO `users` (`email`, `username`, `description`, `is_admin`, `password`)
+VALUES ('admin@example.com', 'adminuser', 'Amministratore del sistema', 1, '$2b$10$mPV0kHvpGS02WDTFQH5Jc.u1gAurjUDofkqzNfpqZMhPmjtdCt1ua');
+
+-- la password è "123" hashata con bcrypt
+
+INSERT INTO `events` 
+(`title`, `description`, `date_start`, `date_end`, `category_id`, `location`, `seats_total`, `seats_available`, `created_by`, `image_url`) 
+VALUES
+('Concerto Rock', 'Un grande concerto rock per gli amanti della musica.', '2025-12-10 20:00:00', '2025-12-10 23:00:00', 1, 'Stadio Centrale', 500, 500, 1, 'https://example.com/rock_concert.jpg'),
+('Mostra d\'Arte Moderna', 'Esposizione di opere di artisti contemporanei.', '2025-12-15 10:00:00', '2025-12-20 18:00:00', 3, 'Museo d\'Arte Moderna', 200, 200, 1, 'https://example.com/arte_moderna.jpg');

@@ -20,16 +20,16 @@ export const getEventById = async (id) => {
 }
 
 // Funzione per creare un nuovo evento
-export const createEvent = async (eventData, userId) => {
+export const createEvent = async (eventData) => {
     const pool = getPool();
     const [result] = await pool.execute(
         `INSERT INTO events
             (title, description, date_start, date_end, category_id, location, seats_total, seats_available, created_by, image_url)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [eventData.title, eventData.description, eventData.date_start, eventData.date_end, eventData.category_id, eventData.location, eventData.seats_total, eventData.seats_total, userId, eventData.image_url]
+        [eventData.title, eventData.description, eventData.date_start, eventData.date_end, eventData.category_id, eventData.location, eventData.seats_total, eventData.seats_total, eventData.created_by, eventData.image_url]
     );
 
-    return { id: result.insertId, ...eventData, created_by: userId };
+    return { id: result.insertId, ...eventData };
 }
 
 // Funzione per eliminare un evento

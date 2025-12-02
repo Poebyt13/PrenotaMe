@@ -24,9 +24,8 @@ export const getEventById = async (req, res, next) => {
 // Funzione per creare un nuovo evento
 export const createEvent = async (req, res, next) => {
     try {
-        const userId = req.user.id;
-        const eventData = req.body;
-        const newEvent = await eventService.createEvent(eventData, userId);
+        const eventDataWithId = req.body;
+        const newEvent = await eventService.createEvent(eventDataWithId);
         res.status(201).json({ success: true, data: newEvent });
     } catch (error) {
         next(error);
