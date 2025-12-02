@@ -15,13 +15,17 @@ export const getAllEvents = async () => {
 
 
 // Funzione per ottenere un evento per ID
-export const getEventById = async (id) => {
+export const getEventById = async (eventId) => {
     const pool = getPool();
-    const [rows] = await pool.execute('SELECT * FROM events WHERE id = ?', [id]);
-    if (rows.length === 0) {
-        throw new Error('Evento non trovato');
-    }
-    return rows[0];
+
+    const [rows] = await pool.execute(`
+        SELECT events.*, users.photo AS user_photo
+        FROM events
+        LEFT JOIN users ON events.created_by = users.id
+        WHERE events.id = ?
+    `, [eventId]);
+
+    return rows[0] || null;
 }
 
 // Funzione per creare un nuovo evento
