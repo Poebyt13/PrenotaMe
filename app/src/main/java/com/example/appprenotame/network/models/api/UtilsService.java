@@ -1,7 +1,6 @@
 package com.example.appprenotame.network.models.api;
 
 import com.example.appprenotame.network.models.response.ApiResponse;
-import com.example.appprenotame.network.models.response.CategoriesData;
 import com.example.appprenotame.network.models.response.Category;
 
 import java.util.List;

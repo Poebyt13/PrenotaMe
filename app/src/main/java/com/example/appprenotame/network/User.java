@@ -1,18 +1,19 @@
 package com.example.appprenotame.network;
 
+import java.time.LocalDateTime;
+
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public class User {
     private int id;
-    private String username;
     private String email;
+    private String username;
     private String description;
-    public User(int id, String username, String email, String description) {
-        this.id = id;
-        this.username = username;
-        this.email = email;
-        this.description = description;
-    }
+    private String photo;
+    private int isAdmin;
+    private String createdAt;
 
 }

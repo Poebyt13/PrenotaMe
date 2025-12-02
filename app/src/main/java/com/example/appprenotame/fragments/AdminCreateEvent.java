@@ -21,7 +21,6 @@ import com.example.appprenotame.R;
 import com.example.appprenotame.network.RetrofitClient;
 import com.example.appprenotame.network.models.api.UtilsService;
 import com.example.appprenotame.network.models.response.ApiResponse;
-import com.example.appprenotame.network.models.response.CategoriesData;
 import com.example.appprenotame.network.models.response.Category;
 
 import java.util.ArrayList;

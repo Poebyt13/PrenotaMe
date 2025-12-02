@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.appprenotame.R;
+import com.example.appprenotame.network.User;
 
 public class MainFragment extends Fragment {
 
@@ -27,7 +28,8 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        boolean isAdmin = true; // Dovremmo determinare questo valore in base allo stato di accesso dell'utente
+        boolean isAdmin = true;
+
         ImageButton plus = view.findViewById(R.id.buttonPlus);
         plus.setOnClickListener(v -> {
             getParentFragmentManager().beginTransaction()

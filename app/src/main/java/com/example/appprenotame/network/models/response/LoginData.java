@@ -10,6 +10,7 @@ public class LoginData {
     private String description;
     private int is_admin;
     private String created_at;
+    private String photo;
 
     @Override
     public String toString() {

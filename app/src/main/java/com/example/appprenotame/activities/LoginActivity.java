@@ -81,9 +81,12 @@ public class LoginActivity extends AppCompatActivity {
                         LoginData loginData = body.getData();
                         User user = new User(
                                 loginData.getId(),
-                                loginData.getUsername(),
                                 loginData.getEmail(),
-                                loginData.getDescription()
+                                loginData.getUsername(),
+                                loginData.getDescription(),
+                                loginData.getPhoto(),
+                                loginData.getIs_admin(),
+                                loginData.getCreated_at()
                         );
                         UserSession.getInstance().setUser(user);
 
