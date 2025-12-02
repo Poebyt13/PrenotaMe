@@ -4,6 +4,7 @@ import com.example.appprenotame.network.models.request.LoginRequest;
 import com.example.appprenotame.network.models.request.RegisterRequest;
 import com.example.appprenotame.network.models.response.ApiResponse;
 import com.example.appprenotame.network.models.response.LoginData;
+import com.example.appprenotame.network.models.response.RegisterData;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -14,5 +15,5 @@ public interface AuthService {
     Call<ApiResponse<LoginData>> login(@Body LoginRequest request);
 
     @POST("auth/register")
-    Call<ApiResponse<RegisterRequest>> register(@Body RegisterRequest request);
+    Call<ApiResponse<RegisterData>> register(@Body RegisterRequest request);
 }

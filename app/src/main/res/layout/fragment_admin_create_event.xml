@@ -111,7 +111,9 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="17/02/2025 10:00"
-                            android:inputType="datetime" />
+                            android:inputType="date" />
+
+
                     </LinearLayout>
 
                     <LinearLayout

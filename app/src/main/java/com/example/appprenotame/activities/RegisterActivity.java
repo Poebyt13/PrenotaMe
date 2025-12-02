@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +18,7 @@ import com.example.appprenotame.network.RetrofitClient;
 import com.example.appprenotame.network.models.api.AuthService;
 import com.example.appprenotame.network.models.request.RegisterRequest;
 import com.example.appprenotame.network.models.response.ApiResponse;
+import com.example.appprenotame.network.models.response.RegisterData;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,15 +69,27 @@ public class RegisterActivity extends AppCompatActivity {
         AuthService authService = RetrofitClient.getClient().create(AuthService.class);
         RegisterRequest request = new RegisterRequest(emailField.getText().toString(), passwordField.getText().toString());
 
-        authService.register(request).enqueue(new Callback<ApiResponse<RegisterRequest>>() {
+        authService.register(request).enqueue(new Callback<ApiResponse<RegisterData>>() {
             @Override
-            public void onResponse(Call<ApiResponse<RegisterRequest>> call, Response<ApiResponse<RegisterRequest>> response) {
-
+            public void onResponse(Call<ApiResponse<RegisterData>> call, Response<ApiResponse<RegisterData>> response) {
+               if (response.isSuccessful() && response.body() != null) {
+                   ApiResponse<RegisterData> body = response.body();
+                   if (response.body().isSuccess()) {
+                       Toast.makeText(RegisterActivity.this , "Registrazione effettuata con successo" , Toast.LENGTH_LONG).show();
+                   }
+                   else {
+                       Toast.makeText(RegisterActivity.this , body.getMessagge() , Toast.LENGTH_LONG).show();
+                   }
+               }
+               else {
+                   Toast.makeText(RegisterActivity.this , "Errore server:" + response.code() , Toast.LENGTH_SHORT).show();
+               }
             }
 
             @Override
-            public void onFailure(Call<ApiResponse<RegisterRequest>> call, Throwable t) {
-
+            public void onFailure(Call<ApiResponse<RegisterData>> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(RegisterActivity.this , "Errore di rete:" + t.getMessage() , Toast.LENGTH_LONG).show();
             }
         });
 
