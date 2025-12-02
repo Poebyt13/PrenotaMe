@@ -1,5 +1,5 @@
 
-import * as categoryService from '../services/categoryService.js';
+import * as categoryService from '../services/categoryServices.js';
 
 // Controller per ottenere tutte le categorie
 export const getCategories = async (req, res, next) => {
