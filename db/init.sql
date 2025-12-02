@@ -14,6 +14,7 @@ CREATE TABLE `users` (
   `email` VARCHAR(100) UNIQUE NOT NULL,
   `username` VARCHAR(100) UNIQUE,
   `description` TEXT,
+  `photo` TEXT DEFAULT NULL,
   `is_admin` TINYINT(1) DEFAULT 0,
   `password` VARCHAR(255) NOT NULL,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -58,15 +59,15 @@ INSERT INTO `categories` (`name`) VALUES
 ('Viaggi e Turismo'),
 ('Formazione e Corsi'),
 ('Cinema e Spettacolo'),
-('Eventi per Famiglie')
+('Eventi per Famiglie');
 
-INSERT INTO `users` (`email`, `username`, `description`, `is_admin`, `password`)
-VALUES ('admin@example.com', 'adminuser', 'Amministratore del sistema', 1, '$2b$10$mPV0kHvpGS02WDTFQH5Jc.u1gAurjUDofkqzNfpqZMhPmjtdCt1ua');
+INSERT INTO `users` (`email`, `username`, `description`, `photo`, `is_admin`, `password`)
+VALUES ('admin@example.com', 'adminuser', 'Amministratore del sistema', 'https://images.ctfassets.net/xjcz23wx147q/iegram9XLv7h3GemB5vUR/0345811de2da23fafc79bd00b8e5f1c6/Max_Rehkopf_200x200.jpeg', 1, '$2b$10$mPV0kHvpGS02WDTFQH5Jc.u1gAurjUDofkqzNfpqZMhPmjtdCt1ua');
 
 -- la password è "123" hashata con bcrypt
 
 INSERT INTO `events` 
 (`title`, `description`, `date_start`, `date_end`, `category_id`, `location`, `seats_total`, `seats_available`, `created_by`, `image_url`) 
 VALUES
-('Concerto Rock', 'Un grande concerto rock per gli amanti della musica.', '2025-12-10 20:00:00', '2025-12-10 23:00:00', 1, 'Stadio Centrale', 500, 500, 1, 'https://example.com/rock_concert.jpg'),
-('Mostra d\'Arte Moderna', 'Esposizione di opere di artisti contemporanei.', '2025-12-15 10:00:00', '2025-12-20 18:00:00', 3, 'Museo d\'Arte Moderna', 200, 200, 1, 'https://example.com/arte_moderna.jpg');
+('Concerto Rock', 'Un grande concerto rock per gli amanti della musica.', '2025-12-10 20:00:00', '2025-12-10 23:00:00', 1, 'Stadio Centrale', 500, 500, 1, 'https://media.istockphoto.com/id/1391884768/it/vettoriale/concerto-di-musicisti-di-band-alternative-con-le-sagome-della-folla.jpg?s=612x612&w=0&k=20&c=dzAi5BBMmhxyiqA7rNhGdvN8weqThfYKVOdCUiiB-gQ='),
+('Mostra d\'Arte Moderna', 'Esposizione di opere di artisti contemporanei.', '2025-12-15 10:00:00', '2025-12-20 18:00:00', 3, 'Museo d\'Arte Moderna', 200, 200, 1, 'https://www.artuu.it/wp-content/uploads/2022/04/GAM-GALLERIA_CIVICA_D-ARTE_MODERNA_E_CONTEMPORANEA.jpeg');

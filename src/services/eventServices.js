@@ -5,9 +5,14 @@ import { getPool } from "../config/db.js";
 // Funzione per ottenere tutti gli eventi
 export const getAllEvents = async () => {
     const pool = getPool();
-    const [rows] = await pool.execute('SELECT * FROM events');
+    const [rows] = await pool.execute(`
+        SELECT events.*, users.photo as user_photo
+        FROM events
+        LEFT JOIN users ON events.created_by = users.id
+    `);
     return rows;
 }
+
 
 // Funzione per ottenere un evento per ID
 export const getEventById = async (id) => {
