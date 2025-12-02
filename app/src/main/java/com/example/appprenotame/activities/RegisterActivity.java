@@ -13,6 +13,14 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.appprenotame.R;
+import com.example.appprenotame.network.RetrofitClient;
+import com.example.appprenotame.network.models.api.AuthService;
+import com.example.appprenotame.network.models.request.RegisterRequest;
+import com.example.appprenotame.network.models.response.ApiResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -45,12 +53,31 @@ public class RegisterActivity extends AppCompatActivity {
 
         if (emailField.getText().toString().isEmpty()) {
             emailField.setError("Email required");
+            return;
         }
         if (passwordField.getText().toString().isEmpty()) {
             passwordField.setError("Password required");
+            return;
         }
         if (!repeatPasswordField.getText().toString().equals(passwordField.getText().toString())) {
             repeatPasswordField.setError("Password non combaciano");
+            return;
         }
+
+        AuthService authService = RetrofitClient.getClient().create(AuthService.class);
+        RegisterRequest request = new RegisterRequest(emailField.getText().toString(), passwordField.getText().toString());
+
+        authService.register(request).enqueue(new Callback<ApiResponse<RegisterRequest>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<RegisterRequest>> call, Response<ApiResponse<RegisterRequest>> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<RegisterRequest>> call, Throwable t) {
+
+            }
+        });
+
     }
 }

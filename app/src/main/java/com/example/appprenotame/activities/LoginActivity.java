@@ -65,6 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         AuthService authService = RetrofitClient.getClient().create(AuthService.class);
+        //AuthService authService =
         LoginRequest request = new LoginRequest(emailText, passwordText);
 
         authService.login(request).enqueue(new Callback<ApiResponse<LoginData>>() {
