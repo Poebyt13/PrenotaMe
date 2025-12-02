@@ -92,7 +92,6 @@ public class AdminCreateEvent extends Fragment {
         cli.getCategories().enqueue(new Callback<ApiResponse<List<Category>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Category>>> call, Response<ApiResponse<List<Category>>> response) {
-                Log.d("response" , response.toString());
                 if (response.isSuccessful() && response.body() != null) {
                     ApiResponse<List<Category>> body = response.body();
                     if (body.isSuccess()) {

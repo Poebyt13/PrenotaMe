@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,22 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.appprenotame.R;
+import com.example.appprenotame.network.RetrofitClient;
+import com.example.appprenotame.network.models.api.EventService;
+import com.example.appprenotame.network.models.response.ApiResponse;
+import com.example.appprenotame.network.models.response.Category;
+import com.example.appprenotame.network.models.response.EventData;
 import com.example.appprenotame.network.User;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class MainFragment extends Fragment {
 
@@ -57,7 +71,7 @@ public class MainFragment extends Fragment {
             titolo.setVisibility(View.VISIBLE);
         }
 
-
+        eventiDisponibili();
 
     }
 
@@ -66,5 +80,36 @@ public class MainFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_main, container, false);
+    }
+
+
+    private void eventiDisponibili() {
+        EventService eventService = RetrofitClient.getClient().create(EventService.class);
+        eventService.getEvents().enqueue(new Callback<ApiResponse<List<EventData>>>() {
+            @Override
+            public void onResponse(Call<ApiResponse<List<EventData>>> call, Response<ApiResponse<List<EventData>>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    ApiResponse<List<EventData>> body = response.body();
+                    if (body.isSuccess()) {
+                        List<EventData> lista = body.getData();
+                        if (!lista.isEmpty()) {
+                            Log.d("lista" , lista.toString());
+                        }
+                    }
+                    else {
+                        Toast.makeText(getContext() , body.getMessagge() , Toast.LENGTH_LONG).show();
+                    }
+                }
+                else {
+                    Toast.makeText(getContext() , "Server error" , Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApiResponse<List<EventData>>> call, Throwable t) {
+                t.printStackTrace();
+                Toast.makeText(getContext() , "Errore di rete" + " " + t.getMessage() , Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

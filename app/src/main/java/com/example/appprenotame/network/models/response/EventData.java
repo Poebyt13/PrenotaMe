@@ -1,19 +1,54 @@
 package com.example.appprenotame.network.models.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDateTime;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class EventData {
+
     private int id;
     private String title;
     private String description;
-    private LocalDateTime dateStart;
-    private LocalDateTime dateEnd;
-    private Integer categoryId;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime date_start;
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private LocalDateTime date_end;
     private String location;
-    private Integer seatsTotal;
-    private Integer seatsAvailable;
-    private Integer createdBy;
-    private String imageUrl;
-    private LocalDateTime createdAt;
+    private int seats_total;
+    private int seats_available;
+
+    private int category_id;
+    private String image_url;
+    private int created_at;
+    private int created_by;
     private String userPhoto;
+
+
+    @Override
+    public String toString() {
+        return "EventData{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", date_start=" + date_start +
+                ", date_end=" + date_end +
+                ", location='" + location + '\'' +
+                ", seats_total=" + seats_total +
+                ", seats_available=" + seats_available +
+                ", category_id=" + category_id +
+                ", image_url='" + image_url + '\'' +
+                ", created_at=" + created_at +
+                ", created_by=" + created_by +
+                ", userPhoto='" + userPhoto + '\'' +
+                '}';
+    }
 }
+
