@@ -10,6 +10,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.appprenotame.R;
 import com.example.appprenotame.fragments.CompleteProfileFragment;
+import com.example.appprenotame.fragments.MainFragment;
+import com.example.appprenotame.network.User;
+import com.example.appprenotame.network.UserSession;
 
 
 public class HomeActivity extends AppCompatActivity {
@@ -25,10 +28,22 @@ public class HomeActivity extends AppCompatActivity {
             return insets;
         });
 
+        User user = UserSession.getInstance().getUser();
+
+        boolean isIncomplete =
+                user.getUsername() == null || user.getUsername().isEmpty() ||
+                        user.getDescription() == null || user.getDescription().isEmpty();
+
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container_view, new CompleteProfileFragment())
-                    .commit();
+            if (isIncomplete) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container_view, new CompleteProfileFragment())
+                        .commit();
+            } else {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragment_container_view, new MainFragment())
+                        .commit();
+            }
         }
 
     }

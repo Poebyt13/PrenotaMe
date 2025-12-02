@@ -12,8 +12,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.appprenotame.R;
+import com.example.appprenotame.activities.HomeActivity;
+import com.example.appprenotame.activities.LoginActivity;
+import com.example.appprenotame.network.RetrofitClient;
+import com.example.appprenotame.network.User;
+import com.example.appprenotame.network.UserSession;
+import com.example.appprenotame.network.models.api.AuthService;
+import com.example.appprenotame.network.models.request.CompleteProfileRequest;
+import com.example.appprenotame.network.models.response.ApiResponse;
+import com.example.appprenotame.network.models.response.CompleteProfileData;
+import com.example.appprenotame.network.models.response.LoginData;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CompleteProfileFragment extends Fragment {
 
@@ -41,12 +56,50 @@ public class CompleteProfileFragment extends Fragment {
                 descriptionField.setError("Description required");
                 return;
             }
-            getParentFragmentManager().beginTransaction()
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                    .replace(R.id.fragment_container_view , new WelcomeFragment())
-                    .addToBackStack(null)
-                    .commit();
+
+
+            User user = UserSession.getInstance().getUser();
+
+            AuthService authService = RetrofitClient.getClient().create(AuthService.class);
+            CompleteProfileRequest request = new CompleteProfileRequest(
+                    user.getId(),
+                    usernameField.getText().toString(),
+                    descriptionField.getText().toString()
+            );
+
+            authService.completeProfile(request).enqueue(new Callback<ApiResponse<CompleteProfileData>>() {
+                @Override
+                public void onResponse(Call<ApiResponse<CompleteProfileData>> call, Response<ApiResponse<CompleteProfileData>> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        ApiResponse<CompleteProfileData> body = response.body();
+                        if (body.isSuccess()) {
+                            CompleteProfileData data = body.getData();
+                            Toast.makeText(getContext(), "Profilo completato con successo!", Toast.LENGTH_SHORT).show();
+
+                            getParentFragmentManager().beginTransaction()
+                                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                    .replace(R.id.fragment_container_view , new WelcomeFragment())
+                                    .addToBackStack(null)
+                                    .commit();
+
+                        } else {
+                            Toast.makeText(getContext(),  body.getMessagge(), Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(getContext(), "Errore server: " + response.code(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ApiResponse<CompleteProfileData>> call, Throwable t) {
+                    t.printStackTrace();
+                    Toast.makeText(getContext(), "Errore di rete: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+
         });
+
+
 
     }
 

@@ -2,6 +2,7 @@ package com.example.appprenotame.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,6 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.appprenotame.R;
 import com.example.appprenotame.network.RetrofitClient;
+import com.example.appprenotame.network.User;
+import com.example.appprenotame.network.UserSession;
 import com.example.appprenotame.network.models.api.AuthService;
 import com.example.appprenotame.network.models.request.LoginRequest;
 import com.example.appprenotame.network.models.response.ApiResponse;
@@ -65,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         AuthService authService = RetrofitClient.getClient().create(AuthService.class);
-        //AuthService authService =
         LoginRequest request = new LoginRequest(emailText, passwordText);
 
         authService.login(request).enqueue(new Callback<ApiResponse<LoginData>>() {
@@ -77,8 +79,16 @@ public class LoginActivity extends AppCompatActivity {
 
                     if (response.body().isSuccess()) {
                         LoginData loginData = body.getData();
+                        User user = new User(
+                                loginData.getId(),
+                                loginData.getUsername(),
+                                loginData.getEmail(),
+                                loginData.getDescription()
+                        );
+                        UserSession.getInstance().setUser(user);
+
                         Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                        Toast.makeText(LoginActivity.this, "Login successful! Welcome " + loginData.getUsername(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Login successful!" , Toast.LENGTH_SHORT).show();
                         startActivity(intent);
                     } else {
                         Toast.makeText(LoginActivity.this, body.getMessagge(), Toast.LENGTH_SHORT).show();
