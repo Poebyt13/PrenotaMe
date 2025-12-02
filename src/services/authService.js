@@ -1,40 +1,51 @@
-
 // Database connection
 import { getPool } from "../config/db.js";
 
-// Hashing delle password   
-import bcrypt from 'bcrypt';
-
-// Funzione per il login dell'utente
-export const loginUser = async (username, password) => {
-    const pool = getPool();
-    const [rows] = await pool.execute('SELECT * FROM users WHERE username = ?', [username]);
-
-    if (rows.length === 0) {
-        throw new Error('Utente non trovato');
-    }
-
-    const user = rows[0];
-  
-    if (!bcrypt.compareSync(password, user.password)) {
-        throw new Error('Password errata');
-    }  
-
-    return { id: user.id, username: user.username };
-}
+// Hashing delle password
+import bcrypt from "bcrypt";
 
 // Funzione per la registrazione dell'utente
-export const registerUser = async (username, password) => {
-    const pool = getPool();
-    
-    const [rows] = await pool.execute('SELECT * FROM users WHERE username = ?', [username]);
-    if (rows.length > 0) {
-        throw new Error('Username già esistente');
-    }
+export const registerUser = async (email, password) => {
+  const pool = getPool();
+  const [rows] = await pool.execute("SELECT * FROM users WHERE email = ?", [
+    email,
+  ]);
+  if (rows.length > 0) {
+    throw new Error("ExpectedError: Email già in uso!");
+  }
 
-    const hashedPassword = bcrypt.hashSync(password, 10);
+  const hashedPassword = bcrypt.hashSync(password, 10);
 
-    await pool.execute('INSERT INTO users (username, password) VALUES (?, ?)', [username, hashedPassword]);
+  await pool.execute("INSERT INTO users (email, password) VALUES (?, ?)", [
+    email,
+    hashedPassword,
+  ]);
 
-    return { message: 'Utente registrato con successo' };
-}
+  return { message: "Utente registrato con successo" };
+};
+
+// Funzione per il login dell'utente
+export const loginUser = async (email, password) => {
+  const pool = getPool();
+  const [rows] = await pool.execute("SELECT * FROM users WHERE email = ?", [
+    email,
+  ]);
+
+  if (rows.length === 0) {
+    throw new Error("ExpectedError: Utente non trovato");
+  }
+
+  const user = rows[0];
+  if (!bcrypt.compareSync(password, user.password)) {
+    throw new Error("ExpectedError: Password errata");
+  }
+
+  return {
+    id: user.id,
+    email: user.email,
+    username: user.username,
+    description: user.description,
+    is_admin: user.is_admin,
+    created_at: user.created_at,
+  };
+};
