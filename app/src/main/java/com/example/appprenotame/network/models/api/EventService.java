@@ -31,4 +31,10 @@ public interface EventService {
 
     @PUT("events/{id}")
     Call<ApiResponse<EventData>> updateEvent(@Path("id") int id, @Body UpdateEventRequest request);
+
+    @GET("events/creator/{id}")
+    Call<ApiResponse<List<EventData>>> getEventsByCreator(@Path("id") int id);
+
+    @GET("events/booked/{id}")
+    Call<ApiResponse<List<EventData>>> getBookedEventsByUser(@Path("id") int id);
 }
