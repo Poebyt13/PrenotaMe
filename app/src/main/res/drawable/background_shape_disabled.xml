@@ -1,0 +1,20 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Shadow evidente -->
+    <item android:top="4dp" android:left="4dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#55000000"/> <!-- nero più visibile -->
+            <corners android:radius="12dp"/>
+        </shape>
+    </item>
+
+    <!-- Sfondo bianco con bordo -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#a0a0a0"/>
+            <stroke android:width="2dp" android:color="#FFAAAAAA"/>
+            <corners android:radius="12dp"/>
+        </shape>
+    </item>
+
+</layer-list>

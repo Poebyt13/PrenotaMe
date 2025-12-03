@@ -27,6 +27,7 @@ import com.example.appprenotame.network.models.response.ApiResponse;
 import com.example.appprenotame.network.models.response.Category;
 import com.example.appprenotame.network.models.response.EventData;
 import com.example.appprenotame.network.User;
+import com.example.appprenotame.network.UserSession;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,11 +47,9 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
         ListView lisView = view.findViewById(R.id.listaEventi);
-
-
-        boolean isAdmin = true;
+        User user = UserSession.getInstance().getUser();
+        boolean isAdmin = user.getIsAdmin() == 1;
 
         ImageButton plus = view.findViewById(R.id.buttonPlus);
         plus.setOnClickListener(v -> {

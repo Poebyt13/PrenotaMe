@@ -1,6 +1,7 @@
 package com.example.appprenotame.network.models;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.appprenotame.R;
+import com.example.appprenotame.fragments.AdminUpdateEventFragment;
 import com.example.appprenotame.fragments.UserProfileFragment;
 import com.example.appprenotame.network.models.response.EventData;
 import java.util.List;
@@ -64,7 +66,7 @@ public class EventAdapter extends ArrayAdapter<EventData> {
 
         if (evento != null) {
             String url = evento.getImage_url();
-            String url1 = evento.getImage_url();
+            String url1 = evento.getUser_photo();
             if (url != null && !url.isEmpty()) {
                 Glide.with(getContext()).load(url).into(viewHolder.immagineEvento);
             }
@@ -73,12 +75,29 @@ public class EventAdapter extends ArrayAdapter<EventData> {
             }
 
             viewHolder.immagineProfiloUtente.setOnClickListener(v -> {
+                UserProfileFragment userProfileFragment = new UserProfileFragment();
+                Bundle args = new Bundle();
+                args.putInt("userId", evento.getCreated_by());
+                userProfileFragment.setArguments(args);
+
                 fragment.getParentFragmentManager().beginTransaction()
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                        .replace(R.id.fragment_container_view, new UserProfileFragment())
+                        .replace(R.id.fragment_container_view, userProfileFragment)
                         .addToBackStack(null)
                         .commit();
+            });
 
+            viewHolder.immagineEvento.setOnClickListener(v -> {
+                AdminUpdateEventFragment adminFrag = new AdminUpdateEventFragment();
+                Bundle args = new Bundle();
+                args.putInt("eventId", evento.getId());
+                adminFrag.setArguments(args);
+
+                fragment.getParentFragmentManager().beginTransaction()
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .replace(R.id.fragment_container_view, adminFrag)
+                        .addToBackStack(null)
+                        .commit();
             });
 
             viewHolder.dataInizio.setText(evento.getDate_start());

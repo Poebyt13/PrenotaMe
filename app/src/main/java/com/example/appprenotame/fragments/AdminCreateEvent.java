@@ -19,9 +19,14 @@ import android.widget.Toast;
 
 import com.example.appprenotame.R;
 import com.example.appprenotame.network.RetrofitClient;
+import com.example.appprenotame.network.User;
+import com.example.appprenotame.network.UserSession;
+import com.example.appprenotame.network.models.api.EventService;
 import com.example.appprenotame.network.models.api.UtilsService;
+import com.example.appprenotame.network.models.request.EventRequest;
 import com.example.appprenotame.network.models.response.ApiResponse;
 import com.example.appprenotame.network.models.response.Category;
+import com.example.appprenotame.network.models.response.EventData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +37,7 @@ import retrofit2.Response;
 
 public class AdminCreateEvent extends Fragment {
 
-
+    private List<Category> fullCategoryList = new ArrayList<>();
 
     public AdminCreateEvent() {
         // Required empty public constructor
@@ -67,6 +72,7 @@ public class AdminCreateEvent extends Fragment {
         Button botnetSubmit = view.findViewById(R.id.submitButton);
 
         botnetSubmit.setOnClickListener(v -> {
+
             String titleText = titleField.getText().toString();
             String descriptionText = descriptionField.getText().toString();
             String dataStartText = dataStartField.getText().toString();
@@ -77,24 +83,71 @@ public class AdminCreateEvent extends Fragment {
             String urlText = urlField.getText().toString();
 
             if (titleText.isEmpty() || descriptionText.isEmpty() || dataStartText.isEmpty() ||
-            dataFineText.isEmpty() || categoryText.isEmpty() || seatsNumber.isEmpty()
-            || positionText.isEmpty() || urlText.isEmpty()) {
+                    dataFineText.isEmpty() || categoryText.isEmpty() || seatsNumber.isEmpty()
+                    || positionText.isEmpty() || urlText.isEmpty()) {
                 Toast.makeText(getContext() , "Compila tutti i campi" , Toast.LENGTH_LONG).show();
                 return;
             }
+
+            int selectedIndex = categoryField.getSelectedItemPosition();
+            int categoryId = fullCategoryList.get(selectedIndex).getId();
+            User user = UserSession.getInstance().getUser();
+
+            EventRequest req = new EventRequest(
+                    titleText,
+                    descriptionText,
+                    dataStartText,
+                    dataFineText,
+                    categoryId,
+                    positionText,
+                    Integer.parseInt(seatsNumber),
+                    user.getId(),
+                    urlText
+            );
+
+            EventService eventService = RetrofitClient.getClient().create(EventService.class);
+
+            eventService.createEvent(req).enqueue(new Callback<ApiResponse<EventData>>() {
+                @Override
+                public void onResponse(Call<ApiResponse<EventData>> call, Response<ApiResponse<EventData>> response) {
+                    Log.d("response" , response.toString());
+                    if (response.isSuccessful() && response.body() != null) {
+                        ApiResponse<EventData> body = response.body();
+                        Log.d("body" , body.toString());
+                        if (body.isSuccess()) {
+                            Toast.makeText(getContext(), "Evento creato!", Toast.LENGTH_LONG).show();
+                            getParentFragmentManager().popBackStack();
+                        } else {
+                            Toast.makeText(getContext(), body.getMessagge(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                    else
+                    {
+                        Toast.makeText(getContext(), "Errore server", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ApiResponse<EventData>> call, Throwable t) {
+                    Toast.makeText(getContext(), "Errore rete: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            });
+
         });
+
     }
 
 
-    private List<String> allCategories(Spinner categoryField) {
+    private void allCategories(Spinner categoryField) {
         UtilsService cli = RetrofitClient.getClient().create(UtilsService.class);
-        List<Category> categorie = new ArrayList<Category>();
+
         cli.getCategories().enqueue(new Callback<ApiResponse<List<Category>>>() {
             @Override
             public void onResponse(Call<ApiResponse<List<Category>>> call, Response<ApiResponse<List<Category>>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     ApiResponse<List<Category>> body = response.body();
                     if (body.isSuccess()) {
+                        fullCategoryList = body.getData();
                         List<Category> listaCategorie = body.getData();
                         if (!listaCategorie.isEmpty()) {
                             List<String> nomi = new ArrayList<String>();
@@ -120,6 +173,5 @@ public class AdminCreateEvent extends Fragment {
                 Toast.makeText(getContext() , "Errore di rete: " + t.getMessage() , Toast.LENGTH_LONG).show();
             }
         });
-        return categorie.stream().map(Category::getName).toList();
     }
 }

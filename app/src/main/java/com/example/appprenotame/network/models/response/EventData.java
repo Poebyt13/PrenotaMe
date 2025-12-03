@@ -27,7 +27,7 @@ public class EventData {
     private String image_url;
     private String created_at;
     private int created_by;
-    private String userPhoto;
+    private String user_photo;
 
 
     @Override
@@ -45,7 +45,7 @@ public class EventData {
                 ", image_url='" + image_url + '\'' +
                 ", created_at=" + created_at +
                 ", created_by=" + created_by +
-                ", userPhoto='" + userPhoto + '\'' +
+                ", userPhoto='" + user_photo + '\'' +
                 '}';
     }
 }
