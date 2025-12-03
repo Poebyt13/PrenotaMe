@@ -19,6 +19,16 @@ import com.bumptech.glide.Glide;
 import com.example.appprenotame.R;
 import com.example.appprenotame.fragments.AdminUpdateEventFragment;
 import com.example.appprenotame.fragments.UserProfileFragment;
+import com.example.appprenotame.fragments.BookingResponse;
+import com.example.appprenotame.network.RetrofitClient;
+import com.example.appprenotame.network.UserSession;
+import com.example.appprenotame.network.models.api.BookingService;
+import com.example.appprenotame.network.models.request.CreateBooking;
+import com.example.appprenotame.network.models.response.ApiResponse;
+import com.example.appprenotame.network.models.response.CreateBookingResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import com.example.appprenotame.network.models.response.EventData;
 import java.util.List;
 
@@ -104,6 +114,71 @@ public class EventAdapter extends ArrayAdapter<EventData> {
             viewHolder.dataFine.setText(evento.getDate_end());
             viewHolder.titolo.setText(evento.getTitle());
             viewHolder.posizione.setText(evento.getLocation());
+
+            viewHolder.joinEvent.setOnClickListener(v -> {
+                if (UserSession.getInstance().getUser() == null) {
+                    BookingResponse br = new BookingResponse();
+                    Bundle b = new Bundle();
+                    b.putString("message", "Devi prima effettuare il login");
+                    br.setArguments(b);
+                    fragment.getParentFragmentManager().beginTransaction()
+                            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                            .replace(R.id.fragment_container_view, br)
+                            .addToBackStack(null)
+                            .commit();
+                    return;
+                }
+
+                int currentUserId = UserSession.getInstance().getUser().getId();
+
+                CreateBooking req = new CreateBooking(String.valueOf(evento.getId()), String.valueOf(currentUserId));
+                BookingService bookingService = RetrofitClient.getClient().create(BookingService.class);
+                bookingService.createBooking(req).enqueue(new Callback<ApiResponse<CreateBookingResponse>>() {
+                    @Override
+                    public void onResponse(Call<ApiResponse<CreateBookingResponse>> call, Response<ApiResponse<CreateBookingResponse>> response) {
+                        String message;
+                        boolean successFlag = false;
+                        if (response.isSuccessful() && response.body() != null) {
+                            ApiResponse<CreateBookingResponse> body = response.body();
+                            if (body.isSuccess()) {
+                                successFlag = true;
+                                CreateBookingResponse data = body.getData();
+                                message = (data != null && data.getMessage() != null) ? data.getMessage() : "Prenotazione effettuata";
+                            } else {
+                                message = body.getMessagge() != null ? body.getMessagge() : "Errore nella prenotazione";
+                            }
+                        } else {
+                            message = "Errore di rete: " + response.code();
+                        }
+
+                        BookingResponse br = new BookingResponse();
+                        Bundle b = new Bundle();
+                        b.putString("message", message);
+                        b.putBoolean("success", successFlag);
+                        br.setArguments(b);
+                        fragment.getParentFragmentManager().beginTransaction()
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .replace(R.id.fragment_container_view, br)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApiResponse<CreateBookingResponse>> call, Throwable t) {
+                        String message = "Errore di rete: " + t.getMessage();
+                        BookingResponse br = new BookingResponse();
+                        Bundle b = new Bundle();
+                        b.putString("message", message);
+                        b.putBoolean("success", false);
+                        br.setArguments(b);
+                        fragment.getParentFragmentManager().beginTransaction()
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                                .replace(R.id.fragment_container_view, br)
+                                .addToBackStack(null)
+                                .commit();
+                    }
+                });
+            });
 
         }
         return convertView;

@@ -63,7 +63,6 @@ public class UserProfileFragment extends Fragment {
         EventAdapter createdAdapter = new EventAdapter(this, createdEvents);
         EventAdapter joinedAdapter = new EventAdapter(this, joinedEvents);
 
-        // adapter di default mostra gli eventi creati
         listUserEvents.setAdapter(createdAdapter);
         listUserEvents.setEmptyView(emptyUserEvents);
 
@@ -71,7 +70,6 @@ public class UserProfileFragment extends Fragment {
             getParentFragmentManager().popBackStack();
         });
 
-        // recupera userId dagli argomenti
         Bundle args = getArguments();
         if (args != null && args.containsKey("userId")) {
 
