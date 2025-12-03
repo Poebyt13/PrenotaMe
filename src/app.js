@@ -12,6 +12,7 @@ import corsPolicy from './config/corsPolicy.js';
 import authRoutes from './routes/authRoutes.js';
 import eventRoutes from './routes/eventRoutes.js';
 import categoryRoutes from './routes/categoryRoutes.js';
+import bookingRoutes from './routes/bookingRoutes.js';
 
 const app = express()
 
@@ -25,6 +26,7 @@ app.use(cookieParser())
 app.use('/api/auth', authRoutes)
 app.use('/api/events', eventRoutes)
 app.use('/api/categories', categoryRoutes)
+app.use('/api/bookings', bookingRoutes);
 
 // error handler middleware
 app.use(errorHandler)

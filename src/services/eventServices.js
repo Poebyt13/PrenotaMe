@@ -51,7 +51,7 @@ export const deleteEvent = async (id) => {
     const pool = getPool();
     const [result] = await pool.execute('DELETE FROM events WHERE id = ?', [id]);
     if (result.affectedRows === 0) {
-        throw new Error('Evento non trovato o già eliminato');
+        throw new Error('ExpectedError: Evento non trovato o già eliminato');
     }
     return { message: 'Evento eliminato con successo' };
 }
@@ -67,7 +67,7 @@ export const updateEvent = async (eventId, eventData) => {
     );
 
     if (result.affectedRows === 0) {
-        throw new Error('Evento non trovato o nessuna modifica effettuata');
+        throw new Error('ExpectedError: Evento non trovato o nessuna modifica effettuata');
     }
 
     return { message: 'Evento aggiornato con successo' };

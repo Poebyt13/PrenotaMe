@@ -11,6 +11,7 @@ export const getCategories = async (req, res, next) => {
   }
 }
 
+// Controller per ottenere una categoria per ID
 export const getCategoryById = async (req, res, next) => {
   try {
     const category = await categoryService.getCategoryById(req.params.id);
