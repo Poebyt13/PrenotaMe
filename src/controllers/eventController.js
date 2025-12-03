@@ -41,3 +41,15 @@ export const deleteEvent = async (req, res, next) => {
         next(error);
     }
 }
+
+// Funzione per aggiornare un evento
+export const updateEvent = async (req, res, next) => {
+    try {
+        const eventId = req.params.id;
+        const eventData = req.body;
+        const updatedEvent = await eventService.updateEvent(eventId, eventData);
+        res.status(200).json({ success: true, data: updatedEvent });
+    } catch (error) {
+        next(error);
+    }
+}

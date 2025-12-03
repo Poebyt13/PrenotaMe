@@ -8,5 +8,6 @@ const router = express.Router();
 
 // Eventi routes
 router.get('/', categoryController.getCategories);
+router.get('/:id', categoryController.getCategoryById);
 
 export default router;

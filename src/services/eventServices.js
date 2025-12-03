@@ -50,3 +50,20 @@ export const deleteEvent = async (id) => {
     }
     return { message: 'Evento eliminato con successo' };
 }
+
+// Funzione per aggiornare un evento
+export const updateEvent = async (eventId, eventData) => {
+    const pool = getPool();
+    const [result] = await pool.execute(
+        `UPDATE events
+         SET title = ?, description = ?, image_url = ?
+         WHERE id = ?`,
+        [eventData.title, eventData.description, eventData.image_url, eventId]
+    );
+
+    if (result.affectedRows === 0) {
+        throw new Error('Evento non trovato o nessuna modifica effettuata');
+    }
+
+    return { message: 'Evento aggiornato con successo' };
+}
