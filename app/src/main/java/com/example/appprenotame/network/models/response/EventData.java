@@ -17,17 +17,15 @@ public class EventData {
     private int id;
     private String title;
     private String description;
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime date_start;
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime date_end;
+    private String date_start;
+    private String date_end;
     private String location;
     private int seats_total;
     private int seats_available;
 
     private int category_id;
     private String image_url;
-    private int created_at;
+    private String created_at;
     private int created_by;
     private String userPhoto;
 
