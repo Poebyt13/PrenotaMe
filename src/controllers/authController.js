@@ -33,3 +33,14 @@ export const completeProfile = async (req, res, next) => {
         next(error);
     }
 }
+
+// Controller per ottenere un utente tramite ID
+export const getUserById = async (req, res, next) => {
+    try {
+        const { id } = req.params;
+        const result = await authService.getUserById(id);
+        res.status(200).json({ success: true, data: result });
+    } catch (error) {
+        next(error);
+    }
+}

@@ -61,3 +61,17 @@ export const completeUserProfile = async (id, username, description) => {
 
   return { message: "Profilo utente aggiornato con successo" };
 }
+
+// Funzione per ottenere un utente tramite ID
+export const getUserById = async (id) => {
+  const pool = getPool();
+  const [rows] = await pool.execute("SELECT id, email, username, description, photo, is_admin, created_at FROM users WHERE id = ?", [
+    id,
+  ]);
+
+  if (rows.length === 0) {
+    throw new Error("ExpectedError: Utente non trovato");
+  }
+
+  return rows[0];
+}
