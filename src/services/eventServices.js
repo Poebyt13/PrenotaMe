@@ -38,6 +38,11 @@ export const createEvent = async (eventData) => {
         [eventData.title, eventData.description, eventData.date_start, eventData.date_end, eventData.category_id, eventData.location, eventData.seats_total, eventData.seats_total, eventData.created_by, eventData.image_url]
     );
 
+    await pool.execute(
+        `INSERT INTO bookings (user_id, event_id) VALUES (?, ?)`,
+        [eventData.created_by, result.insertId]
+    );
+
     return { id: result.insertId, ...eventData };
 }
 
@@ -66,4 +71,30 @@ export const updateEvent = async (eventId, eventData) => {
     }
 
     return { message: 'Evento aggiornato con successo' };
+}
+
+// Funzione per ottenere gli eventi creati da un utente specifico
+export const getEventsByCreator = async (creatorId) => {
+    const pool = getPool();
+    const [rows] = await pool.execute(`
+        SELECT events.*, users.photo as user_photo
+        FROM events
+        LEFT JOIN users ON events.created_by = users.id
+        WHERE events.created_by = ?
+    `, [creatorId]);
+    return rows;
+}
+
+
+// Funzione per ottenere tutti gli eventi a cui l'utente ha prenotato
+export const getBookedEventsByUser = async (userId) => {
+    const pool = getPool();
+    const [rows] = await pool.execute(`
+        SELECT events.*, users.photo as user_photo
+        FROM events
+        LEFT JOIN users ON events.created_by = users.id
+        INNER JOIN bookings ON events.id = bookings.event_id
+        WHERE bookings.user_id = ?
+    `, [userId]);
+    return rows;
 }

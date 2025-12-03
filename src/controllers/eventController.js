@@ -53,3 +53,25 @@ export const updateEvent = async (req, res, next) => {
         next(error);
     }
 }
+
+// Funziona per ottenere gli eventi create da un utente specifico
+export const getEventsByCreator = async (req, res, next) => {
+    try {
+        const creatorId = req.params.id;
+        const events = await eventService.getEventsByCreator(creatorId);
+        res.status(200).json({ success: true, data: events });
+    } catch (error) {
+        next(error);
+    }
+}
+
+// Funzione per ottenere tutti gli eventi a cui l'utente ha prenotato
+export const getBookedEventsByUser = async (req, res, next) => {
+    try {
+        const userId = req.params.id;
+        const events = await eventService.getBookedEventsByUser(userId);
+        res.status(200).json({ success: true, data: events });
+    } catch (error) {
+        next(error);
+    }
+}
