@@ -1,6 +1,17 @@
 
 # PrenotaMe — Istruzioni rapide
 
+
+#### Docente
+- Antonio Giovanni Lezzi
+#### Partecipanti
+- Moaaz Bahnassawi
+- Jose Luis Calderon Ludena
+
+
+
+---
+
 #### Che cosa fa
 - App Android (Java) per gestire e prenotare eventi.
 - Backend REST in Node.js/Express.
@@ -12,8 +23,7 @@
 - MySQL (`mysql2`)
 - `bcrypt`, `cookie-parser`, `dotenv`, `cors`
 
-Prima di iniziare
-Assicurati di essere nella cartella in cui vuoi mettere il progetto. Qui useremo `progetto-todo` come esempio di cartella di destinazione; se il clone crea una cartella con nome diverso (es. `PrenotaMe`) entra in quella cartella.
+Prima di iniziare la configurazione assicurati di essere nella cartella in cui vuoi mettere il progetto. Qui useremo `progetto-todo` come esempio di cartella di destinazione; se il clone crea una cartella con nome diverso (es. `PrenotaMe`) entra in quella cartella.
 
 ### Configurazione `git worktree`
 Segui questi comandi sul computer che deve riprodurre la struttura di lavoro:
@@ -47,13 +57,6 @@ git status
 
 
 Uso `git worktree` per tenere ogni branch collegato a una cartella separata: il risultato è un progetto ordinato, la possibilità di lavorare contemporaneamente su `main`, `frontend` e `backend` e il vantaggio di non duplicare la storia (rispetto a tre cloni separati).
- 
-####  Collaboratori
-- Jose luis calderon ludena
-- Moazz bahnasawi
-
-#### Docente
-- Antonio Giovanni Lezzi
 
 ### Informazioni utili: 
 - Backend: entra nella cartella `backend`, crea un file `.env` (vedi `backend/db/README.md` per le variabili), poi esegui `npm install` e `npm start`.
